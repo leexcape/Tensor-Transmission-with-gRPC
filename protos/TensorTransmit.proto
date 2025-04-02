@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tensor_transmit;
+
+service TensorTransmit {
+  rpc GetActivationFloat(Layer) returns (ActivationFloat) {}
+  rpc GetActivationByte(Layer) returns (ActivationByte) {}
+}
+
+message Layer {
+  int32 layer_index = 1;
+}
+
+message ActivationFloat {
+  repeated float data = 1;
+  repeated int32 shape_f = 2;
+}
+
+message ActivationByte {
+  bytes buffer = 1;
+  repeated int32 shape_b = 2;
+  string dtype = 3;
+}
